@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 
-import '../../camera_manager/data/virtual_camera_manager.dart';
+import '../../camera_manager/data/native_camera_manager.dart';
 import '../../camera_manager/domain/camera_manager.dart';
 import '../../database/app_database.dart';
 import '../../gallery/data/capture_repository.dart';
@@ -20,7 +20,7 @@ Future<void> configureDependencies() async {
 
   final database = AppDatabase();
   final localStorage = LocalStorageService(database: database);
-  final cameraManager = VirtualCameraManager();
+  final cameraManager = NativeCameraManager();
   final visionEngine = MockVisionEngine();
   final appsScriptClient = AppsScriptClient();
   final captureRepository = CaptureRepository(database: database);

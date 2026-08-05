@@ -47,6 +47,8 @@ dependencies:
   meta: ^1.17.0
   sqlite3_flutter_libs: ^0.6.0+eol
   image: ^4.9.1
+  camera: ^0.11.1
+  permission_handler: ^11.4.0
 
 dev_dependencies:
   flutter_test:

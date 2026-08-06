@@ -11,5 +11,4 @@ class AppConstants {
 
   static const String defaultSyncEndpointKey = 'sync.endpoint';
   static const String defaultThemeKey = 'settings.theme.mode';
-  static const String defaultDemoModeKey = 'settings.demo.mode';
 }

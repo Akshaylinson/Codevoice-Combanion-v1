@@ -1,4 +1,4 @@
-﻿# CodeVoice Vision
+# CodeVoice Vision
 
 CodeVoice Vision is a Flutter app for local-first visual capture and sync.
 It is designed around four isolated layers:
@@ -8,7 +8,7 @@ It is designed around four isolated layers:
 - Local storage and database persistence
 - Cloud sync through Google Apps Script
 
-The current codebase is a working modular scaffold with demo implementations for camera, vision, and sync flows. It is structured so those demo pieces can later be swapped for real device and cloud integrations without changing the overall architecture.
+The codebase is organized as a modular Flutter app with real camera capture, on-device vision processing, local storage, and optional Apps Script sync wiring.
 
 ## What It Includes
 
@@ -23,15 +23,15 @@ The current codebase is a working modular scaffold with demo implementations for
 
 ## Project Structure
 
-- `lib/camera_manager` - camera source discovery, connection, and capture flow
-- `lib/vision_engine` - structured analysis output for each image
-- `lib/local_storage` - image and thumbnail storage on disk
-- `lib/database` - Drift database and repository layer
-- `lib/sync` - Apps Script sync client and queue manager
-- `lib/gallery` - capture history and stored metadata
-- `lib/settings` - persisted app settings
-- `lib/home` - dashboard and system overview
-- `lib/shared` - reusable UI widgets
+- lib/camera_manager - camera source discovery, connection, and capture flow
+- lib/vision_engine - structured analysis output for each image
+- lib/local_storage - image and thumbnail storage on disk
+- lib/database - Drift database and repository layer
+- lib/sync - Apps Script sync client and queue manager
+- lib/gallery - capture history and stored metadata
+- lib/settings - persisted app settings
+- lib/home - dashboard and system overview
+- lib/shared - reusable UI widgets
 
 ## Requirements
 
@@ -44,46 +44,46 @@ The current codebase is a working modular scaffold with demo implementations for
 
 From the project root:
 
-```bash
+`ash
 flutter pub get
-```
+`
 
 If you change Drift tables or generated data models, regenerate code with:
 
-```bash
+`ash
 flutter pub run build_runner build --delete-conflicting-outputs
-```
+`
 
 ## How To Run
 
 Run the app on an available device or emulator:
 
-```bash
+`ash
 flutter run
-```
+`
 
 If you want to target a specific device, list devices first:
 
-```bash
+`ash
 flutter devices
-```
+`
 
 Then run against a chosen device id:
 
-```bash
+`ash
 flutter run -d <device_id>
-```
+`
 
 ## Useful Commands
 
-```bash
+`ash
 flutter analyze
 flutter test
 flutter clean
-```
+`
 
 ## Notes
 
-- Sync can run in demo mode when no Apps Script endpoint is configured.
+- Sync requires a configured Apps Script endpoint to upload data.
 - Captures are stored locally first, then queued for sync.
 - The project is intentionally modular so native camera, OCR, barcode, and cloud implementations can be added later.

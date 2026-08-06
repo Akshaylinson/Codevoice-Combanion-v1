@@ -44,6 +44,7 @@ class CaptureWorkflowService {
     final visionResult = await visionEngine.process(
       imageId: imageId,
       source: capture.source,
+      imagePath: assetPaths.imagePath,
       imageBytes: capture.imageBytes,
       capturedAt: capture.capturedAt,
     );
@@ -68,3 +69,4 @@ class CaptureWorkflowService {
     return record;
   }
 }
+

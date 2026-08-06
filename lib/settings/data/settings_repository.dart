@@ -29,22 +29,18 @@ class SettingsRepository {
         (mode) => mode.name == values[AppConstants.defaultThemeKey],
         orElse: () => AppThemeModeSetting.dark,
       ),
-      demoMode: values[AppConstants.defaultDemoModeKey] != 'false',
       appsScriptSettings: AppsScriptSettings(
         endpointUrl: values[AppConstants.defaultSyncEndpointKey] ?? '',
-        demoMode: values['settings.sync.demoMode'] != 'false',
       ),
       defaultCameraSourceId: values['settings.defaultCameraSourceId'] ?? 'phone_rear',
       autoSyncEnabled: values['settings.autoSyncEnabled'] == 'true',
-      captureNoteTemplate: values['settings.captureNoteTemplate'] ?? 'Captured from CodeVoice Vision',
+      captureNoteTemplate: values['settings.captureNoteTemplate'] ?? '',
     );
   }
 
   Future<void> saveSettings(AppSettings settings) async {
     await _repository.setSetting(AppConstants.defaultThemeKey, settings.themeMode.name);
-    await _repository.setSetting(AppConstants.defaultDemoModeKey, settings.demoMode.toString());
     await _repository.setSetting(AppConstants.defaultSyncEndpointKey, settings.appsScriptSettings.endpointUrl);
-    await _repository.setSetting('settings.sync.demoMode', settings.appsScriptSettings.demoMode.toString());
     await _repository.setSetting('settings.defaultCameraSourceId', settings.defaultCameraSourceId);
     await _repository.setSetting('settings.autoSyncEnabled', settings.autoSyncEnabled.toString());
     await _repository.setSetting('settings.captureNoteTemplate', settings.captureNoteTemplate);
@@ -54,3 +50,5 @@ class SettingsRepository {
 
   Future<String?> getSetting(String key) => _repository.getSetting(key);
 }
+
+

@@ -92,7 +92,7 @@ class VirtualCameraManager implements CameraManager {
       fps: settings.fps,
       orientation: settings.orientation,
       imageQuality: settings.imageQuality,
-      firmwareVersion: 'demo-1.0',
+      firmwareVersion: 'virtual-1.0',
       supportsFlash: sourceId == 'phone_rear',
       supportsZoom: true,
       supportsFocus: true,
@@ -182,3 +182,4 @@ class VirtualCameraManager implements CameraManager {
     return encoded;
   }
 }
+

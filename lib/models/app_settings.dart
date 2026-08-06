@@ -7,7 +7,6 @@ enum AppThemeModeSetting { dark, light, system }
 class AppSettings extends Equatable {
   const AppSettings({
     required this.themeMode,
-    required this.demoMode,
     required this.appsScriptSettings,
     required this.defaultCameraSourceId,
     required this.autoSyncEnabled,
@@ -17,16 +16,14 @@ class AppSettings extends Equatable {
   factory AppSettings.defaults() {
     return AppSettings(
       themeMode: AppThemeModeSetting.dark,
-      demoMode: true,
       appsScriptSettings: AppsScriptSettings.defaults(),
       defaultCameraSourceId: 'phone_rear',
       autoSyncEnabled: false,
-      captureNoteTemplate: 'Captured from CodeVoice Vision',
+      captureNoteTemplate: '',
     );
   }
 
   final AppThemeModeSetting themeMode;
-  final bool demoMode;
   final AppsScriptSettings appsScriptSettings;
   final String defaultCameraSourceId;
   final bool autoSyncEnabled;
@@ -34,7 +31,6 @@ class AppSettings extends Equatable {
 
   AppSettings copyWith({
     AppThemeModeSetting? themeMode,
-    bool? demoMode,
     AppsScriptSettings? appsScriptSettings,
     String? defaultCameraSourceId,
     bool? autoSyncEnabled,
@@ -42,7 +38,6 @@ class AppSettings extends Equatable {
   }) {
     return AppSettings(
       themeMode: themeMode ?? this.themeMode,
-      demoMode: demoMode ?? this.demoMode,
       appsScriptSettings: appsScriptSettings ?? this.appsScriptSettings,
       defaultCameraSourceId: defaultCameraSourceId ?? this.defaultCameraSourceId,
       autoSyncEnabled: autoSyncEnabled ?? this.autoSyncEnabled,
@@ -53,10 +48,10 @@ class AppSettings extends Equatable {
   @override
   List<Object?> get props => <Object?>[
         themeMode,
-        demoMode,
         appsScriptSettings,
         defaultCameraSourceId,
         autoSyncEnabled,
         captureNoteTemplate,
       ];
 }
+

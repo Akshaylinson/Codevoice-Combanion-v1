@@ -8,7 +8,7 @@ import '../../local_storage/data/local_storage_service.dart';
 import '../../settings/data/settings_repository.dart';
 import '../../sync/data/apps_script_client.dart';
 import '../../sync/data/sync_manager.dart';
-import '../../vision_engine/data/mock_vision_engine.dart';
+import '../../vision_engine/data/mlkit_vision_engine.dart';
 import '../../vision_engine/domain/vision_engine.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -21,7 +21,7 @@ Future<void> configureDependencies() async {
   final database = AppDatabase();
   final localStorage = LocalStorageService(database: database);
   final cameraManager = NativeCameraManager();
-  final visionEngine = MockVisionEngine();
+  final visionEngine = MlKitVisionEngine();
   final appsScriptClient = AppsScriptClient();
   final captureRepository = CaptureRepository(database: database);
   final settingsRepository = SettingsRepository(database: database);
@@ -44,5 +44,5 @@ Future<void> configureDependencies() async {
   await localStorage.initialize();
   await captureRepository.seedDefaultCameraSources();
   await settingsRepository.seedDefaults();
-  await syncManager.seedDemoQueueIfNeeded();
 }
+

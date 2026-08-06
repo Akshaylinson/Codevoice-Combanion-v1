@@ -24,7 +24,7 @@ class SyncManager {
   final DatabaseRepository _databaseRepository;
   final Uuid _uuid = const Uuid();
 
-  Future<void> seedDemoQueueIfNeeded() async {
+  Future<void> seedInitialQueueIfNeeded() async {
     final existing = await readQueue();
     if (existing.isNotEmpty) {
       return;
@@ -130,3 +130,4 @@ class SyncManager {
     }
   }
 }
+

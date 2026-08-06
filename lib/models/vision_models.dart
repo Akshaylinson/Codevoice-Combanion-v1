@@ -92,24 +92,24 @@ class VisionObject extends Equatable {
 class VisionTextBlock extends Equatable {
   const VisionTextBlock({
     required this.text,
-    required this.confidence,
+    this.confidence,
     required this.language,
   });
 
   final String text;
-  final double confidence;
+  final double? confidence;
   final String language;
 
   Map<String, dynamic> toMap() => <String, dynamic>{
         'text': text,
-        'confidence': confidence,
         'language': language,
+        if (confidence != null) 'confidence': confidence,
       };
 
   factory VisionTextBlock.fromMap(Map<String, dynamic> map) {
     return VisionTextBlock(
       text: map['text'] as String,
-      confidence: (map['confidence'] as num).toDouble(),
+      confidence: map['confidence'] == null ? null : (map['confidence'] as num).toDouble(),
       language: map['language'] as String,
     );
   }
@@ -122,24 +122,24 @@ class VisionQrResult extends Equatable {
   const VisionQrResult({
     required this.rawValue,
     required this.format,
-    required this.confidence,
+    this.confidence,
   });
 
   final String rawValue;
   final String format;
-  final double confidence;
+  final double? confidence;
 
   Map<String, dynamic> toMap() => <String, dynamic>{
         'rawValue': rawValue,
         'format': format,
-        'confidence': confidence,
+        if (confidence != null) 'confidence': confidence,
       };
 
   factory VisionQrResult.fromMap(Map<String, dynamic> map) {
     return VisionQrResult(
       rawValue: map['rawValue'] as String,
       format: map['format'] as String,
-      confidence: (map['confidence'] as num).toDouble(),
+      confidence: map['confidence'] == null ? null : (map['confidence'] as num).toDouble(),
     );
   }
 

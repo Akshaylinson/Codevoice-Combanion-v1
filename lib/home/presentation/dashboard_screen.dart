@@ -56,7 +56,7 @@ class DashboardScreen extends ConsumerWidget {
                     Wrap(
                       spacing: 12,
                       runSpacing: 12,
-                      children: [
+                      children: const [
                         StatusBadge(label: 'Camera Manager'),
                         StatusBadge(label: 'Vision Engine'),
                         StatusBadge(label: 'Drift Local DB'),
@@ -78,7 +78,11 @@ class DashboardScreen extends ConsumerWidget {
                   MetricTile(label: 'Captures Stored', value: '${stats.totalCaptures}', icon: Icons.photo_library_rounded),
                   MetricTile(label: 'Pending Sync Jobs', value: '${stats.pendingUploads}', icon: Icons.sync_rounded),
                   MetricTile(label: 'Camera Sources', value: '${cameraSourcesAsync.value?.length ?? 0}', icon: Icons.camera_alt_rounded),
-                  MetricTile(label: 'Demo Mode', value: settingsAsync.value?.demoMode == true ? 'On' : 'Off', icon: Icons.science_rounded),
+                  MetricTile(
+                    label: 'Sync Status',
+                    value: settingsAsync.value?.appsScriptSettings.endpointUrl.isNotEmpty == true ? 'Configured' : 'Not Set',
+                    icon: Icons.cloud_done_rounded,
+                  ),
                 ],
               ),
               const SizedBox(height: 20),
@@ -95,10 +99,7 @@ class DashboardScreen extends ConsumerWidget {
                       data: (sources) => Wrap(
                         spacing: 10,
                         runSpacing: 10,
-                        children: [
-                          for (final source in sources)
-                            StatusBadge(label: source.label),
-                        ],
+                        children: [for (final source in sources) StatusBadge(label: source.label)],
                       ),
                       loading: () => const CircularProgressIndicator(),
                       error: (error, stackTrace) => Text('Camera sources unavailable: $error'),
@@ -125,10 +126,11 @@ class DashboardScreen extends ConsumerWidget {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(capture.visionResult.ocrText, style: theme.textTheme.titleMedium),
+                              if (capture.visionResult.ocrText.isNotEmpty)
+                                Text(capture.visionResult.ocrText, style: theme.textTheme.titleMedium),
                               const SizedBox(height: 8),
                               Text('Faces: ${capture.visionResult.faceCount}'),
-                              Text('Objects: ${capture.visionResult.detectedObjects}'),
+                              Text('Objects: ${capture.visionResult.detectedObjects.isEmpty ? 'None' : capture.visionResult.detectedObjects}'),
                               Text('Camera: ${capture.cameraSource.label}'),
                               Text('Processing: ${capture.processingTimeMs} ms'),
                               if (capture.note != null && capture.note!.isNotEmpty) ...[

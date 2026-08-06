@@ -7,31 +7,20 @@ enum SyncJobStatus { queued, running, completed, failed }
 class AppsScriptSettings extends Equatable {
   const AppsScriptSettings({
     required this.endpointUrl,
-    required this.demoMode,
   });
 
   factory AppsScriptSettings.defaults() {
-    return const AppsScriptSettings(
-      endpointUrl: '',
-      demoMode: true,
-    );
+    return const AppsScriptSettings(endpointUrl: '');
   }
 
   final String endpointUrl;
-  final bool demoMode;
 
-  AppsScriptSettings copyWith({
-    String? endpointUrl,
-    bool? demoMode,
-  }) {
-    return AppsScriptSettings(
-      endpointUrl: endpointUrl ?? this.endpointUrl,
-      demoMode: demoMode ?? this.demoMode,
-    );
+  AppsScriptSettings copyWith({String? endpointUrl}) {
+    return AppsScriptSettings(endpointUrl: endpointUrl ?? this.endpointUrl);
   }
 
   @override
-  List<Object?> get props => <Object?>[endpointUrl, demoMode];
+  List<Object?> get props => <Object?>[endpointUrl];
 }
 
 class SyncJob extends Equatable {
@@ -99,3 +88,4 @@ class SyncJob extends Equatable {
         remoteSheetRowId,
       ];
 }
+

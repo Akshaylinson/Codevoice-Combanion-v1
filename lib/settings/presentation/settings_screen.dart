@@ -17,7 +17,6 @@ class SettingsScreen extends ConsumerStatefulWidget {
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final _endpointController = TextEditingController();
   final _noteTemplateController = TextEditingController();
-  bool? _demoMode;
   bool? _autoSync;
   AppThemeModeSetting? _themeMode;
   String? _defaultCameraSourceId;
@@ -41,7 +40,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           _endpointController.text = _endpointController.text.isEmpty ? settings.appsScriptSettings.endpointUrl : _endpointController.text;
           _noteTemplateController.text =
               _noteTemplateController.text.isEmpty ? settings.captureNoteTemplate : _noteTemplateController.text;
-          _demoMode ??= settings.demoMode;
           _autoSync ??= settings.autoSyncEnabled;
           _themeMode ??= settings.themeMode;
           _defaultCameraSourceId ??= settings.defaultCameraSourceId;
@@ -72,13 +70,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       decoration: const InputDecoration(labelText: 'Apps Script Endpoint URL'),
                     ),
                     const SizedBox(height: 12),
-                    SwitchListTile(
-                      contentPadding: EdgeInsets.zero,
-                      value: _demoMode ?? false,
-                      onChanged: (value) => setState(() => _demoMode = value),
-                      title: const Text('Demo Mode'),
-                      subtitle: const Text('Return local mock sync responses without making network calls.'),
-                    ),
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
                       value: _autoSync ?? false,
@@ -142,8 +133,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       Wrap(
                         spacing: 8,
                         children: [
-                          StatusBadge(label: settings.appsScriptSettings.demoMode ? 'Demo Sync On' : 'Real Sync'),
-                          StatusBadge(label: settings.demoMode ? 'Demo App On' : 'Demo App Off'),
+                          StatusBadge(label: settings.appsScriptSettings.endpointUrl.isEmpty ? 'Sync Unconfigured' : 'Sync Ready'),
+                          StatusBadge(label: settings.autoSyncEnabled ? 'Auto Sync On' : 'Auto Sync Off'),
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -151,10 +142,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         onPressed: () async {
                           final updated = settings.copyWith(
                             themeMode: _themeMode,
-                            demoMode: _demoMode,
                             appsScriptSettings: settings.appsScriptSettings.copyWith(
                               endpointUrl: _endpointController.text.trim(),
-                              demoMode: _demoMode ?? false,
                             ),
                             defaultCameraSourceId: _defaultCameraSourceId,
                             autoSyncEnabled: _autoSync,

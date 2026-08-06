@@ -25,15 +25,9 @@ class AppsScriptClient {
     required AppsScriptUploadPayload payload,
   }) async {
     if (payload.endpointUrl.isEmpty) {
-      return SyncResponse(
-        success: true,
-        message: 'Demo mode upload completed locally.',
-        driveUrl: 'https://drive.google.com/file/d/${payload.capture.id}',
-        sheetRowId: payload.capture.id,
-        rawResponse: <String, dynamic>{
-          'demo': true,
-          'captureId': payload.capture.id,
-        },
+      return const SyncResponse(
+        success: false,
+        message: 'Apps Script endpoint is not configured.',
       );
     }
 

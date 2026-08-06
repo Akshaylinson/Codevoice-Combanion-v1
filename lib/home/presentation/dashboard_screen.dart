@@ -129,7 +129,6 @@ class DashboardScreen extends ConsumerWidget {
                               if (capture.visionResult.ocrText.isNotEmpty)
                                 Text(capture.visionResult.ocrText, style: theme.textTheme.titleMedium),
                               const SizedBox(height: 8),
-                              Text('Faces: ${capture.visionResult.faceCount}'),
                               Text('Objects: ${capture.visionResult.detectedObjects.isEmpty ? 'None' : capture.visionResult.detectedObjects}'),
                               Text('Camera: ${capture.cameraSource.label}'),
                               Text('Processing: ${capture.processingTimeMs} ms'),

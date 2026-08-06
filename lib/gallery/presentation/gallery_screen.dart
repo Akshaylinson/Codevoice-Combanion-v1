@@ -100,9 +100,9 @@ class _CaptureRow extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(height: 6),
-                  Text('Faces: ${capture.visionResult.faceCount}  |  Objects: ${capture.visionResult.detectedObjects}'),
+                  Text('Objects: ${capture.visionResult.detectedObjects.isEmpty ? 'None' : capture.visionResult.detectedObjects}'),
                   if (capture.visionResult.ocrText.isNotEmpty)
-                    Text('OCR: ${capture.visionResult.ocrText}', maxLines: 1, overflow: TextOverflow.ellipsis),
+                    Text('OCR: ${capture.visionResult.ocrText}', maxLines: 2, overflow: TextOverflow.ellipsis),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,

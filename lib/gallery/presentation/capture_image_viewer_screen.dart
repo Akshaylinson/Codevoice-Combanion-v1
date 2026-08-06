@@ -90,10 +90,14 @@ class _CaptureImageViewerScreenState extends State<CaptureImageViewerScreen> {
                   style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16),
                 ),
                 const SizedBox(height: 8),
-                Text('Faces: ${capture.visionResult.faceCount}', style: const TextStyle(color: Colors.white70)),
-                Text('Objects: ${capture.visionResult.detectedObjects}', style: const TextStyle(color: Colors.white70)),
-                if (capture.visionResult.ocrText.isNotEmpty)
-                  Text('OCR: ${capture.visionResult.ocrText}', style: const TextStyle(color: Colors.white70)),
+                Text('Objects: ${capture.visionResult.detectedObjects.isEmpty ? 'None detected' : capture.visionResult.detectedObjects}', style: const TextStyle(color: Colors.white70)),
+                if (capture.visionResult.ocrBlocks.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  const Text('OCR:', style: TextStyle(color: Colors.white70)),
+                  ...capture.visionResult.ocrBlocks.map(
+                    (block) => Text('  ${block.text}', style: const TextStyle(color: Colors.white60, fontSize: 12)),
+                  ),
+                ],
                 if (capture.visionResult.qrText.isNotEmpty)
                   Text('QR: ${capture.visionResult.qrText}', style: const TextStyle(color: Colors.white70)),
                 if (capture.note != null && capture.note!.isNotEmpty) ...[
